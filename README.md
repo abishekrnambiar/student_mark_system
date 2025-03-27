@@ -20,30 +20,32 @@ Ensure you have the following installed:
 - MySQL Server
 - pip (Python package manager)
 
-### Steps
-1. **Clone the Repository**
-   ```sh
-   git clone https://github.com/abishekrnambiar/student_mark_system.git
-   cd student_mark_system
+### Beginner Setup Guide (Windows + VS Code)
+1. **Install MySQL** from [here](https://dev.mysql.com/downloads/installer/).
+2. **Open MySQL Command Line Client**.
+3. **Create the database**:
+   ```sql
+   CREATE DATABASE your_database_name;
    ```
-
-2. **Install Dependencies**
+4. **Select the database**:
+   ```sql
+   USE your_database_name;
+   ```
+5. **Import the database schema**:
+   ```sql
+   SOURCE C:/path/to/mark_system.sql;
+   ```
+   _(Example: `SOURCE C:/Users/YourName/Desktop/mark_system.sql;`)_
+6. **Open the project folder in VS Code**.
+7. **Open the terminal in VS Code**.
+8. **Install dependencies**:
    ```sh
    pip install -r requirements.txt
    ```
-
-3. **Set Up the Database**
-   - Import `mark_system.sql` into MySQL:
-     ```sh
-     mysql -u root -p < mark_system.sql
-     ```
-   - **Modify Database Credentials:**
-     - Open `app.py` and update the database name and password:
-       ```python
-       database="your_database_name"
-       password="your_password"
-       ```
-     - Replace `your_database_name` and `your_password` with your actual MySQL credentials.
+9. **Run the application**:
+   ```sh
+   python3 app.py
+   ```
 
 ## Usage
 1. **Run the Application**
