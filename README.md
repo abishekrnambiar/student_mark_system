@@ -48,6 +48,43 @@ Ensure you have the following installed:
    ```
 
 ## Usage
+
+## Screenshots
+Here are some previews of the system:
+
+![Login Page](screenshots/LOGIN PAGE.png)
+![Student First Login Password Reset](screenshots/STUDENT FIRST LOGIN PASSWORD RESET.png)
+![Student Dashboard](screenshots/STUDENT DASHBOARD.png)
+![Teacher Dashboard](screenshots/TEACHER DASHBOARD.png)
+![Student Details](screenshots/STUDENT DETAILS.png)
+![Example Data - Student Details](screenshots/EXAMPLE DATA (STUDENT DETAILS).png)
+![Add Subject and Marks](screenshots/ADD SUBJECT AND MARKS.png)
+![Example Data - Add Subject and Marks](screenshots/EXAMPLE DATA (ADD SUBJECT AND MARKS).png)
+
+- **Login Page**  
+  ![Login Page](screenshots/LOGIN%20PAGE.png)
+
+- **Teacher Dashboard**  
+  ![Teacher Dashboard](screenshots/TEACHER%20DASHBOARD.png)
+
+- **Student Dashboard**  
+  ![Student Dashboard](screenshots/STUDENT%20DASHBOARD.png)
+
+- **Student First Login (Password Reset)**  
+  ![Student First Login](screenshots/STUDENT%20FIRST%20LOGIN%20PASSWORD%20RESET.png)
+
+- **Student Details**  
+  ![Student Details](screenshots/STUDENT%20DETAILS.png)
+
+- **Add Subject and Marks**  
+  ![Add Subject and Marks](screenshots/ADD%20SUBJECT%20AND%20MARKS.png)
+
+- **Example Data (Add Subject and Marks)**  
+  ![Example Data](screenshots/SAMPLE%20DETAILS%20(ADD%20SUBJECT%20AND%20MARKS).png)
+
+- **Example Data (Student Details)**  
+  ![Example Data](screenshots/SAMPLE%20DETAILS%20(STUDENT%20DETAILS).png)
+
 1. **Run the Application**
    ```sh
    python app.py
