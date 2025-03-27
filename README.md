@@ -23,7 +23,7 @@ Ensure you have the following installed:
 ### Steps
 1. **Clone the Repository**
    ```sh
-   git clone https://github.com/abishekrnambiar/student_mark_system.git
+   git clone https://github.com/abishekrnambiar/student_mark_system
    cd student_mark_system
    ```
 
