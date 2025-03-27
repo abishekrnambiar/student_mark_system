@@ -47,8 +47,6 @@ Ensure you have the following installed:
    python3 app.py
    ```
 
-## Usage
-
 ## Screenshots
 Here are some previews of the system:
 
