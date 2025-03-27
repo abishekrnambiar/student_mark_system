@@ -52,15 +52,6 @@ Ensure you have the following installed:
 ## Screenshots
 Here are some previews of the system:
 
-![Login Page](screenshots/LOGIN PAGE.png)
-![Student First Login Password Reset](screenshots/STUDENT FIRST LOGIN PASSWORD RESET.png)
-![Student Dashboard](screenshots/STUDENT DASHBOARD.png)
-![Teacher Dashboard](screenshots/TEACHER DASHBOARD.png)
-![Student Details](screenshots/STUDENT DETAILS.png)
-![Example Data - Student Details](screenshots/EXAMPLE DATA (STUDENT DETAILS).png)
-![Add Subject and Marks](screenshots/ADD SUBJECT AND MARKS.png)
-![Example Data - Add Subject and Marks](screenshots/EXAMPLE DATA (ADD SUBJECT AND MARKS).png)
-
 - **Login Page**  
   ![Login Page](screenshots/LOGIN%20PAGE.png)
 
@@ -80,10 +71,10 @@ Here are some previews of the system:
   ![Add Subject and Marks](screenshots/ADD%20SUBJECT%20AND%20MARKS.png)
 
 - **Example Data (Add Subject and Marks)**  
-  ![Example Data](screenshots/SAMPLE%20DETAILS%20(ADD%20SUBJECT%20AND%20MARKS).png)
+  ![Example Data](screenshots/EXAMPLE%20DATA%20(ADD%20SUBJECT%20AND%20MARKS).png)
 
 - **Example Data (Student Details)**  
-  ![Example Data](screenshots/SAMPLE%20DETAILS%20(STUDENT%20DETAILS).png)
+  ![Example Data](screenshots/EXAMPLE%20DATA%20(STUDENT%20DETAILS).png)
 
 1. **Run the Application**
    ```sh
@@ -93,4 +84,3 @@ Here are some previews of the system:
 
 ## License
 This project is for educational purposes. Modify as needed!
-
