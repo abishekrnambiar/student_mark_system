@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1, h2 {
+            font-family: "New York", Georgia, Times, serif;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            margin-bottom: 5px;
+            display: block;
+            color: #666;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #007aff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #005bb5;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007aff;
+            color: white;
+        }
+        .total-row {
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #007aff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        #logout-btn {
+            background-color: #ff3b30;
+        }
+        #logout-btn:hover {
+            background-color: #cc2e26;
+        }
+        #back-btn {
+            background-color: #34c759;
+            display: none; /* Hidden by default */
+        }
+        #back-btn:hover {
+            background-color: #28a745;
+        }
+        /* Initially hidden sections */
+        #add-student-section, #student-tables, #add-grade-section {
+            display: none;
+        }
+        .subject-mark-row, .total-row, .delete-student {
+            display: none; /* Hidden by default */
+        }
+    </style>
+    <script>
+        function showStudentDetails() {
+            document.getElementById('add-student-section').style.display = 'block';
+            document.getElementById('student-tables').style.display = 'block';
+            document.getElementById('add-grade-section').style.display = 'none';
+            document.getElementById('student-details-btn').style.display = 'none';
+            document.getElementById('subject-marks-btn').style.display = 'none';
+            document.getElementById('back-btn').style.display = 'inline-block';
+            var tables = document.getElementsByTagName('table');
+            for (var i = 0; i < tables.length; i++) {
+                var rows = tables[i].rows;
+                for (var j = 0; j < rows.length; j++) {
+                    if (rows[j].className === 'subject-mark-row' || rows[j].className === 'total-row') {
+                        rows[j].style.display = 'none';
+                    } else {
+                        rows[j].style.display = 'table-row';
+                    }
+                }
+            }
+        }
+
+        function showSubjectMarks() {
+            document.getElementById('add-student-section').style.display = 'none';
+            document.getElementById('student-tables').style.display = 'block';
+            document.getElementById('add-grade-section').style.display = 'block';
+            document.getElementById('student-details-btn').style.display = 'none';
+            document.getElementById('subject-marks-btn').style.display = 'none';
+            document.getElementById('back-btn').style.display = 'inline-block';
+            var tables = document.getElementsByTagName('table');
+            for (var i = 0; i < tables.length; i++) {
+                var rows = tables[i].rows;
+                for (var j = 0; j < rows.length; j++) {
+                    if (rows[j].className === 'delete-student') {
+                        rows[j].style.display = 'none';
+                    } else {
+                        rows[j].style.display = 'table-row';
+                    }
+                }
+            }
+        }
+
+        function goBack() {
+            document.getElementById('add-student-section').style.display = 'none';
+            document.getElementById('student-tables').style.display = 'none';
+            document.getElementById('add-grade-section').style.display = 'none';
+            document.getElementById('student-details-btn').style.display = 'inline-block';
+            document.getElementById('subject-marks-btn').style.display = 'inline-block';
+            document.getElementById('back-btn').style.display = 'none';
+        }
+
+        function validateMark(input, fieldName) {
+            let mark = input.value;
+            if (isNaN(mark) || mark < 0 || mark > 100) {
+                alert("Please check the " + fieldName + ". Mark must be a number between 0 and 100.");
+                input.value = '';
+                return false;
+            }
+            return true;
+        }
+
+        // Ensure form submission maintains the correct view
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('add-student-form').addEventListener('submit', function(event) {
+                // After submission, showStudentDetails will be called by the form action
+            });
+            document.getElementById('add-grade-form').addEventListener('submit', function(event) {
+                // After submission, showSubjectMarks will be called by the form action
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="logout-btn" onclick="window.location.href='/logout'">Logout</button>
+    <button id="back-btn" onclick="goBack()">Back</button>
+    <h1>Teacher Dashboard</h1>
+    <button id="student-details-btn" onclick="showStudentDetails()">Student Details</button>
+    <button id="subject-marks-btn" onclick="showSubjectMarks()">Subject Marks</button>
+
+    <div id="add-student-section">
+        <h2>Add Student</h2>
+        <form id="add-student-form" action="/add_student" method="POST" onsubmit="showStudentDetails()">
+            <label>Name:</label>
+            <input type="text" name="name" required>
+            <label>Department:</label>
+            <input type="text" name="department" required>
+            <input type="submit" value="Add Student">
+        </form>
+    </div>
+
+    <div id="add-grade-section">
+        <h2>Add Subject and Mark</h2>
+        <form id="add-grade-form" action="/add_grade" method="POST" onsubmit="return validateMark(this.mark, 'mark') && showSubjectMarks()">
+            <label>Username:</label>
+            <input type="text" name="username" required>
+            <label>Subject:</label>
+            <input type="text" name="subject" required>
+            <label>Mark:</label>
+            <input type="number" name="mark" min="0" max="100" required>
+            <input type="submit" value="Add Mark">
+        </form>
+    </div>
+
+    <div id="student-tables">
+        <h2>All Students</h2>
+        {% for student in students %}
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Edit Department</th>
+                <th class="delete-student">Delete</th>
+            </tr>
+            <tr>
+                <td>{{ student['username'] }}</td>
+                <td>{{ student['name'] }}</td>
+                <td>{{ student['department'] }}</td>
+                <td>
+                    <form action="/edit_department" method="POST">
+                        <input type="hidden" name="username" value="{{ student['username'] }}">
+                        <input type="text" name="department" value="{{ student['department'] }}">
+                        <input type="submit" value="Update">
+                    </form>
+                </td>
+                <td class="delete-student">
+                    <form action="/delete_student" method="POST">
+                        <input type="hidden" name="username" value="{{ student['username'] }}">
+                        <input type="submit" value="Delete" style="background-color: #ff3b30;">
+                    </form>
+                </td>
+            </tr>
+            <tr class="subject-mark-row">
+                <th>Subject</th>
+                <th>Mark</th>
+                <th>Edit Mark</th>
+                <th>Delete Subject</th>
+                <th></th> <!-- Empty column to align with above -->
+            </tr>
+            {% for grade in student['grades'] %}
+            <tr class="subject-mark-row">
+                <td>{{ grade['subject'] }}</td>
+                <td>{{ grade['mark'] }}</td>
+                <td>
+                    <form action="/edit_grade" method="POST" onsubmit="return validateMark(this.mark, 'mark')">
+                        <input type="hidden" name="grade_id" value="{{ grade['grade_id'] }}">
+                        <input type="number" name="mark" value="{{ grade['mark'] }}" min="0" max="100" required>
+                        <input type="submit" value="Update">
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete_grade" method="POST">
+                        <input type="hidden" name="grade_id" value="{{ grade['grade_id'] }}">
+                        <input type="submit" value="Delete" style="background-color: #ff3b30;">
+                    </form>
+                </td>
+                <td></td> <!-- Empty column to align with above -->
+            </tr>
+            {% endfor %}
+            <tr class="total-row">
+                <td colspan="4">Total Marks</td>
+                <td>{{ student['total'] }}</td>
+            </tr>
+        </table>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
+            background-color: #1a1a1a;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+            color: #ffffff;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-top: 100px; /* Increased gap after logout button */
+            margin-bottom: 30px; /* Small gap before form */
+        }
+
+        h2 {
+            margin-top: 50px; /* Larger gap before All Students text */
+        }
+
+        form {
+            width: 80%; /* Match table width */
+            margin: 0 auto 20px; /* Centered with bottom margin */
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        label {
+            margin-bottom: 8px;
+            display: block;
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: #333333;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4dabf7;
+            box-shadow: 0 0 5px rgba(77, 171, 247, 0.3);
+        }
+
+        input[type="submit"] {
+            padding: 12px;
+            background: linear-gradient(45deg, #007aff, #00ddeb);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(45deg, #005bb5, #00a3b0);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        input[type="submit"][value="Add Student"] {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            width: auto;
+            display: inline-block;
+        }
+
+        table {
+            width: 80%; /* Reduced table width */
+            margin: 0 auto 20px; /* Centered with bottom margin */
+            border-collapse: collapse;
+            background-color: #2d2d2d;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #404040;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        th {
+            background: linear-gradient(45deg, #007aff, #00ddeb);
+            color: white;
+        }
+
+        #logout-btn {
+            background: linear-gradient(45deg, #ff3b30, #ff6b6b);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            width: auto;
+            display: inline-block;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #logout-btn:hover {
+            background: linear-gradient(45deg, #cc2e26, #d95757);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+        }
+
+        form input[type="submit"][value="Delete"] {
+            background: linear-gradient(45deg, #ff3b30, #ff6b6b);
+            width: auto;
+            padding: 8px 16px;
+        }
+
+        form input[type="submit"][value="Delete"]:hover {
+            background: linear-gradient(45deg, #cc2e26, #d95757);
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            color: #888888;
+            font-size: 12px;
+            background-color: #222222;
+            left: 0;
+        }
+
+        .heart {
+            color: #ff4444;
+            display: inline-block;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <button id="logout-btn" onclick="window.location.href='/logout'">Logout</button>
+    <h1>Add Student</h1>
+    <form action="/add_student" method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <label>Department:</label>
+        <input type="text" name="department" required>
+        <input type="submit" value="Add Student">
+    </form>
+    <h2>All Students</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Edit Department</th>
+            <th>Delete</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student['username'] }}</td>
+            <td>{{ student['name'] }}</td>
+            <td>{{ student['department'] }}</td>
+            <td>
+                <form action="/edit_department" method="POST">
+                    <input type="hidden" name="username" value="{{ student['username'] }}">
+                    <input type="text" name="department" value="{{ student['department'] }}">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+            <td>
+                <form action="/delete_student" method="POST">
+                    <input type="hidden" name="username" value="{{ student['username'] }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <footer>
+        Made with <span class="heart">♥</span> | © 2025 All Rights Reserved
+    </footer>
+</body>
+</html>
